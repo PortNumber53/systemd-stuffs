@@ -1,7 +1,7 @@
 [Unit]
 Description=mass-email-worker.php service for %i
 After=syslog.target network.target postfix.service
-Requires=rabbitmq.service
+Requires=rabbitmq.service emailWorker@%i.service
 
 [Service]
 Type=simple
