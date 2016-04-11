@@ -1,0 +1,12 @@
+[Unit]
+Description=mass-email-worker.php service for %i
+After=syslog.target network.target postfix.service
+Requires=rabbitmq.service
+
+[Service]
+Type=simple
+ExecStartPre=-/usr/bin/touch /var/log/massEmailWorker.log
+ExecStart=/usr/bin/php /var/www/daemon/mass-email-worker.php %i >> /var/log/massEmailWorker.log 2>&1
+
+[Install]
+WantedBy=multi-user.target
