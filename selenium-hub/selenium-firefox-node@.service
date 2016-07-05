@@ -1,0 +1,19 @@
+[Unit]
+Description=Selenium Grid Firefox Node on port %i
+After=docker.service
+Requires=selenium-grid-hub.service
+
+[Service]
+#Type=notify
+TimeoutStartSec=120
+TimeoutStopSec=15
+Restart=always
+RestartSec=10s
+ExecStartPre=-/usr/bin/docker kill selenium/node-firefox-debug-%i
+ExecStartPre=-/usr/bin/docker rm selenium/node-firefox-debug-%i
+ExecStartPre=-/usr/bin/docker pull selenium/node-firefox-debug:latest
+ExecStart=/usr/bin/docker run -P -p %i:5900 --link selenium-hub:hub --name node-firefox-debug-%i selenium/node-firefox-debug:latest
+ExecStop=/usr/bin/docker stop selenium/node-firefox-debug-%i
+
+[Install]
+WantedBy=multi-user.target

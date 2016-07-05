@@ -1,0 +1,19 @@
+[Unit]
+Description=Selenium Grid Chrome Node on port %i
+After=docker.service
+Requires=selenium-grid-hub.service
+
+[Service]
+#Type=notify
+TimeoutStartSec=120
+TimeoutStopSec=15
+Restart=always
+RestartSec=10s
+ExecStartPre=-/usr/bin/docker kill selenium/node-chrome-debug-%i
+ExecStartPre=-/usr/bin/docker rm selenium/node-chrome-debug-%i
+ExecStartPre=-/usr/bin/docker pull selenium/node-chrome-debug:latest
+ExecStart=/usr/bin/docker run -P -p %i:5900 --link selenium-hub:hub --name node-chrome-debug-%i selenium/node-chrome-debug:latest
+ExecStop=/usr/bin/docker stop selenium/node-chrome-debug-%i
+
+[Install]
+WantedBy=multi-user.target
