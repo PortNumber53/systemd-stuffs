@@ -3,7 +3,7 @@ Description=Selenium Grid Hub
 After=docker.service
 
 [Service]
-Type=notify
+Type=simple
 NotifyAccess=all
 TimeoutStartSec=120
 TimeoutStopSec=15

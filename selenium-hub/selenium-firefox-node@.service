@@ -4,7 +4,7 @@ After=docker.service
 Requires=selenium-grid-hub.service
 
 [Service]
-#Type=notify
+Type=simple
 TimeoutStartSec=120
 TimeoutStopSec=15
 Restart=always
