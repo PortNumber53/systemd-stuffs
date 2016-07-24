@@ -3,6 +3,10 @@ Description=Selenium Grid Hub
 After=docker.service
 
 [Service]
+CPUAccounting=true
+CPUQuota=40
+MemoryAccounting=true
+MemoryLimit=2G
 Type=simple
 NotifyAccess=all
 TimeoutStartSec=120
