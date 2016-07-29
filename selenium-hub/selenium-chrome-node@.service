@@ -21,3 +21,4 @@ ExecStop=/usr/bin/docker stop node-chrome-debug-%i
 
 [Install]
 WantedBy=multi-user.target
+DefaultInstance=60000
