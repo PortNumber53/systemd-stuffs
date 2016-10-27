@@ -15,7 +15,7 @@ Restart=always
 RestartSec=10s
 ExecStartPre=-/usr/bin/docker kill selenium-hub
 ExecStartPre=-/usr/bin/docker rm selenium-hub
-ExecStartPre=-/usr/bin/docker pull selenium/hub:latest
+ExecStartPre=-/usr/bin/docker pull selenium/hub:2.53.1
 ExecStart=/usr/bin/docker run -m 512M -p 4444:4444 --name selenium-hub selenium/hub:2.53.1
 ExecStop=/usr/bin/docker stop selenium-hub
 
