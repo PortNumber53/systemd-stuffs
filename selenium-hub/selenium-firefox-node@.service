@@ -4,6 +4,7 @@ After=docker.service
 Requires=selenium-grid-hub.service
 
 [Service]
+EnvironmentFile=/etc/selenium-hub
 CPUAccounting=true
 CPUQuota=40
 MemoryAccounting=true
@@ -15,8 +16,8 @@ Restart=always
 RestartSec=10s
 ExecStartPre=-/usr/bin/docker kill node-firefox-debug-%i
 ExecStartPre=-/usr/bin/docker rm node-firefox-debug-%i
-ExecStartPre=-/usr/bin/docker pull selenium/node-firefox-debug:2.53.1
-ExecStart=/usr/bin/docker run -m 1G -P -p %i:5900 --link selenium-hub:hub --name node-firefox-debug-%i selenium/node-firefox-debug:2.53.1
+ExecStartPre=-/usr/bin/docker pull ${CONTAINER_FIREFOX}
+ExecStart=/usr/bin/docker run -m 1G -P -p %i:5900 --link selenium-hub:hub --name node-firefox-debug-%i ${CONTAINER_FIREFOX}
 ExecStop=/usr/bin/docker stop node-firefox-debug-%i
 
 [Install]
