@@ -4,6 +4,7 @@ After=docker.service
 Requires=selenium-grid-hub.service
 
 [Service]
+EnvironmentFile=/etc/selenium-hub
 CPUAccounting=true
 CPUQuota=25
 MemoryAccounting=true
@@ -15,8 +16,8 @@ Restart=always
 RestartSec=10s
 ExecStartPre=-/usr/bin/docker kill node-chrome-debug-%i
 ExecStartPre=-/usr/bin/docker rm node-chrome-debug-%i
-ExecStartPre=-/usr/bin/docker pull selenium/node-chrome-debug:2.53.1
-ExecStart=/usr/bin/docker run -P -p %i:5900 --link selenium-hub:hub --name node-chrome-debug-%i selenium/node-chrome-debug:2.53.1
+ExecStartPre=-/usr/bin/docker pull ${CONTAINER_CHROME}
+ExecStart=/usr/bin/docker run -P -p %i:5900 --link selenium-hub:hub --name node-chrome-debug-%i ${CONTAINER_CHROME}
 ExecStop=/usr/bin/docker stop node-chrome-debug-%i
 
 [Install]
