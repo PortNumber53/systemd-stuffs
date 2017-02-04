@@ -5,7 +5,6 @@ After=docker.service
 [Service]
 EnvironmentFile=/etc/selenium-hub
 CPUAccounting=true
-CPUQuota=40
 MemoryAccounting=true
 MemoryLimit=2G
 Type=simple
