@@ -6,7 +6,6 @@ Requires=selenium-grid-hub.service
 [Service]
 EnvironmentFile=/etc/selenium-hub
 CPUAccounting=true
-CPUQuota=40
 MemoryAccounting=true
 MemoryLimit=1G
 Type=simple
